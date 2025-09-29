@@ -1,1 +1,12 @@
 Hello world !
+Ce fichier sert à accueillir les mises à jour de ce projet. 
+
+Pour enregistrer les les modifications : 
+git add .
+git commit -m "Début du projet"
+git push
+
+Pour récupérer les mises à jour :
+git pull
+
+Update 0 : création du dépôt
