@@ -9,4 +9,4 @@ git push
 Pour récupérer les mises à jour :
 git pull
 
-Update 0 : création du dépôt
+Update 0 : création du dépôt + récupération des données (matrice vidéo) 
