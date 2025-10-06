@@ -16,7 +16,6 @@ data = loadmat(file_path)
 X = np.array(data["X"])  # converti en ndarray pour sécurité
 m = np.array(data["m"])
 n = np.array(data["n"])
-print(X)
 
 #Ici, on a récupéré la big matrice avec les images vectorisées (X c'est la vidéo)
 #m et n sont les dimensions (en pixel) des images
@@ -52,12 +51,13 @@ bounds = [[0,None] for _ in range(3*t + 2)] #Pas de bornes pour les n+1 variable
 # Création de la vidéo optimale sous forme de vecteur
 b_opt = np.zeros(p)
 
-for i in range(p):
+for i in range(100):
     b_eq = np.concatenate([X[i, :], -X[i, :]])
     model = linprog(c=c, A_eq=A, b_eq = b_eq, bounds=bounds)
     print(i)
 
     if model.success:
+        print(model.x[0], " et ", model.x[1])
         b_opt[i] = model.x[0] - model.x[1]
     else:
         print(f"Pixel {i}: {model.message}")
