@@ -2,6 +2,7 @@ import numpy as np
 import os
 from scipy.io import loadmat
 from scipy.optimize import linprog
+import matplotlib.pyplot as plt
 
 script_dir = os.path.dirname(os.path.abspath(__file__))  # marche pour un script .py
 file_path = os.path.join(script_dir, "pedsX.mat")
@@ -28,16 +29,41 @@ t = 100
 
 
 # Objectif
-c = [1, -1, -1]
+c = np.zeros(3*t + 2)
+c[2:2+t] = 1
 
 # Création de la matrice contraintes A 
-A = np.zeros((2*t, 3*t +1))
+A = np.zeros((2*t, 3*t + 2))
 for j in range(t):
-    # Première contrainte pour les 100 itérations
+    # Première contrainte : u_j - X(i,j) + (b_i^+ - b_i^-) - s1_j = 0
     A[j, 0] = 1
-    A[j, j + 1] = 1
-    A[j, j + 101] = -1
-    # Deuxième contrainte pour les 100 itérations
-    A[100 + j, 0] = -1
-    A[100 + j, j + 1] = 1
-    A[100 + j, j + 201] = -1
+    A[j, 1] = -1
+    A[j, 2 + j] = 1
+    A[j, 2 + t + j] = -1
+
+    # Deuxième contrainte : u_j + X(i,j) - (b_i^+ - b_i^-) - s2_j = 0
+    A[t + j, 0] = -1
+    A[t + j, 1] = 1
+    A[t + j, 2 + j] = 1
+    A[t + j, 2 + 2*t + j] = -1
+
+bounds = [[0,None] for _ in range(3*t + 2)] #Pas de bornes pour les n+1 variables
+
+# Création de la vidéo optimale sous forme de vecteur
+b_opt = np.zeros(p)
+
+for i in range(p):
+    b_eq = np.concatenate([X[i, :], -X[i, :]])
+    model = linprog(c=c, A_eq=A, b_eq = b_eq, bounds=bounds)
+    print(i)
+
+    if model.success:
+        b_opt[i] = model.x[0] - model.x[1]
+    else:
+        print(f"Pixel {i}: {model.message}")
+
+background = b_opt.reshape((m, n))
+plt.imshow(background, cmap='gray')
+plt.title("Arrière-plan estimé")
+plt.axis('off')
+plt.show()
