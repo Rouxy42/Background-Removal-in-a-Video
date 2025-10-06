@@ -10,3 +10,5 @@ Pour récupérer les mises à jour :
 git pull
 
 Update 0 : création du dépôt + récupération des données (matrice vidéo) 
+Update 1-2 : modélisation du problème et écriture sous forme standard + création d'un fichier .py pour le code
+Update 3 : 
