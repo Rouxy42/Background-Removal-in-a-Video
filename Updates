@@ -12,3 +12,4 @@ git pull
 Update 0 : création du dépôt + récupération des données (matrice vidéo) 
 Update 1-2 : modélisation du problème et écriture sous forme standard + création d'un fichier .py pour le code
 Update 3 : Elucidation de ce qu'on doit faire + création de la matrice contrainte (A)
+Update 4 : Début algo mais fonctionne pas
