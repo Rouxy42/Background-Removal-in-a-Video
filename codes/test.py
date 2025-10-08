@@ -51,7 +51,7 @@ bounds = [[0,None] for _ in range(3*t + 2)] #Pas de bornes pour les n+1 variable
 # Création de la vidéo optimale sous forme de vecteur
 b_opt = np.zeros(p)
 
-for i in range(100):
+for i in range(p):
     b_eq = np.concatenate([X[i, :], -X[i, :]])
     model = linprog(c=c, A_eq=A, b_eq = b_eq, bounds=bounds)
     print(i)
