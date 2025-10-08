@@ -62,7 +62,7 @@ for i in range(100):
     else:
         print(f"Pixel {i}: {model.message}")
 
-background = b_opt.reshape((m, n))
+background = b_opt.reshape((n, m)).T    #transposé pour voir
 plt.imshow(background, cmap='gray')
 plt.title("Arrière-plan estimé")
 plt.axis('off')
