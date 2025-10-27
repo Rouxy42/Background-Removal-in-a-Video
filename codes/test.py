@@ -28,18 +28,18 @@ p = m * n  # Taille du vecteur image
 t = 100
 
 # Affichage d'une image
-"""image = X[:,1].reshape((n,m)).T
+image = X[:,1].reshape((n,m)).T
 image = 1 - image
-plt.imshow(image, cmap = "grey")"""
+plt.imshow(image, cmap = "grey")
 
 # Vidéo initiale
-"""frames = []
+frames = []
 for i in range(X.shape[1]):
     frame = X[:,i].reshape((n,m)).T
     frame = 1 - frame
     frames.append(frame)
 
-imageio.mimsave("video.mp4", frames, fps=10)"""
+imageio.mimsave("video.mp4", frames, fps=10)
 
 # Objectif
 c = np.zeros(3*t + 2)
